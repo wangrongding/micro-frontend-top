@@ -1,0 +1,27 @@
+{
+	"name": "micro-frontend-top",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"ins": "npm-run-all --serial ins:*",
+		"ins:main": "cd main && npm i",
+		"ins:child-a": "cd child-a && npm i",
+		"start": "npm-run-all --parallel start:*",
+		"start:main": "cd main && npm start",
+		"start:child-a": "cd child-a && npm start",
+		"clone:all": "npm-run-all --serial clone:*",
+		"clone:a": "echo \"11111\" && exit 1",
+		"clone:b": "echo \"22222\" && exit 1",
+		"clone:c": "echo \"33333\" && exit 1",
+		"clone:d": "echo \"44444\" && exit 1",
+		"test": "node ./clone.js"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"download-git-repo": "^3.0.2",
+		"npm-run-all": "^4.1.5"
+	},
+	"dependencies": {
+		"loading-cli": "^1.1.0"
+	}
+}
