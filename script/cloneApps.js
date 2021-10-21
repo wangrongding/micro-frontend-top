@@ -1,6 +1,6 @@
 const gitClone = require("git-clone/promise");
 const loading = require("loading-cli");
-
+const appList = require("./appList");
 /* 
     repoUrl:git仓库地址
     targetPath:下载的目标目录
@@ -33,25 +33,6 @@ async function clone(repoUrl, targetPath, cloneOptions = { shallow: 1 }) {
 		});
 }
 
-let repos = [
-	{
-		repoUrl: "https://gitee.com/wangrongding/test22222.git",
-		repoName: "test22222",
-	},
-	{
-		repoUrl: "https://gitee.com/wangrongding/test-repo1.git",
-		repoName: "test-repo1",
-	},
-	{
-		repoUrl: "https://gitee.com/wangrongding/jellyfish.git",
-		repoName: "jellyfish",
-	},
-	{
-		repoUrl: "https://gitee.com/wangrongding/frontend-park.git#main",
-		repoName: "frontend-park",
-	},
-];
-
-repos.forEach(async (item) => {
+appList.forEach(async (item) => {
 	await clone(item.repoUrl, "./packages/" + item.repoName);
 });
