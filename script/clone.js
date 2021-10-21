@@ -15,6 +15,14 @@ let repos = [
 		repoUrl: "direct:https://gitee.com/wangrongding/test-repo1#master",
 		repoName: "test-repo1",
 	},
+	{
+		repoUrl: "direct:https://gitee.com/wangrongding/jellyfish.git#master",
+		repoName: "jellyfish",
+	},
+	/* {
+		repoUrl: "direct:https://gitee.com/wangrongding/frontend-park.git#main",
+		repoName: "frontend-park",
+	}, */
 ];
 
 async function clone(repoUrl, repoName) {
