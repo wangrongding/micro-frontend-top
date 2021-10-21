@@ -3,6 +3,7 @@ const path = require("path");
 const util = require("util");
 const loading = require("loading-cli");
 const appList = require("./appList");
+const cliProgress = require("cli-progress");
 
 const exec = util.promisify(require("child_process").exec);
 
@@ -30,7 +31,7 @@ async function install(targetPath, installMethod) {
 			command = "npm i";
 			break;
 	}
-	console.log(`${targetPath} 开始下载，请耐心等待...`);
+	// console.log(`${targetPath} 开始下载，请耐心等待...`);
 	const { stdout, stderr } = await exec(command, {
 		cwd: path.resolve(process.cwd(), "packages/" + targetPath),
 	});
@@ -38,12 +39,25 @@ async function install(targetPath, installMethod) {
 	stderr && console.error(targetPath, "❓❓", stderr);
 }
 
-console.log(`即将进入所有模块并下载依赖：${JSON.stringify(appList)}`);
+console.log(
+	`即将进入所有模块并下载依赖：${JSON.stringify(
+		appList.map((item) => {
+			return item.repoName;
+		})
+	)}`
+);
 
-appList.forEach(async (item) => {
-	const load = loading(`请耐心等待,${item.repoName}>正在安装依赖...`).start();
+// create a new progress bar instance and use shades_classic theme
+const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+// start the progress bar with a total value of 200 and start value of 0
+bar1.start(200, 0);
+
+appList.forEach(async (item, index) => {
+	// const load = loading(`请耐心等待,${item.repoName}>正在安装依赖...`).start();
 	await install(item.repoName, item.installMethod);
-	load.stop();
+	bar1.update((index + 1) * (200 / appList.length));
+	// load.stop();
+	(index + 1) * (200 / appList.length) == 200 && bar1.stop();
 });
 
 process.on("unhandledRejection", (reason, p) => {
