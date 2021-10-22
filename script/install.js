@@ -49,15 +49,21 @@ console.log(
 
 // create a new progress bar instance and use shades_classic theme
 const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+let end = 100;
+let start = 0;
 // start the progress bar with a total value of 200 and start value of 0
-bar1.start(200, 0);
+bar1.start(end, start);
+
+setInterval(() => {
+	(index + 1) * (end / appList.length) == end && bar1.stop();
+}, 20);
 
 appList.forEach(async (item, index) => {
 	// const load = loading(`请耐心等待,${item.repoName}>正在安装依赖...`).start();
 	await install(item.repoName, item.installMethod);
-	bar1.update((index + 1) * (200 / appList.length));
+	bar1.update((index + 1) * (end / appList.length));
+	index == appList.length - 1 && bar1.stop();
 	// load.stop();
-	(index + 1) * (200 / appList.length) == 200 && bar1.stop();
 });
 
 process.on("unhandledRejection", (reason, p) => {
