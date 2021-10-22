@@ -5,12 +5,9 @@
 	"scripts": {
 		"clone": "node ./script/cloneApps.js",
 		"ins": "node ./script/install.js",
-		"ins2": "npm-run-all --serial ins:*",
-		"ins:main": "cd main && yarn",
-		"ins:fp": "cd packages/frontend-park && yarn",
-		"start": "npm-run-all --parallel start:*",
-		"start:main": "cd main && yarn serve",
-		"start:fp": "cd packages/frontend-park && yarn serve"
+		"serve": "npm-run-all --parallel serve:*",
+		"serve:main": "cd main && yarn serve",
+		"serve:fp": "cd packages/frontend-park && yarn serve"
 	},
 	"license": "MIT",
 	"devDependencies": {
