@@ -79,16 +79,35 @@ async function clone(repoUrl, targetPath, cloneOptions = { shallow: 1 }) {
 
 **主要需要做如下配置(这里以 vue 应用为例):**
 
+-   在 子应用的 src 目录新增 public-path.js 文件
+
+```javascript
+if (window.__POWERED_BY_QIANKUN__) {
+	__webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
+}
+```
+
 -   导出相应的生命周期钩子
 
-在所有子应用的`vue.config.js`的 devServer 中配置跨域 headers
+-   子应用的`vue.config.js`中必须添加如下配置
 
 ```js
-devServer: {
-    headers: {
-        "Access-Control-Allow-Origin": "*", // 主应用获取子应用时跨域响应头
-    }
-},
+const appName = require("./package.json").name;
+module.exports = {
+	devServer: {
+		port: 9427,
+		headers: {
+			"Access-Control-Allow-Origin": "*", // 主应用获取子应用时跨域响应头
+		},
+	},
+	configureWebpack: {
+		output: {
+			library: `${appName}-[name]`,
+			libraryTarget: "umd", // 把微应用打包成 umd 库格式
+			jsonpFunction: `webpackJsonp_${appName}`,
+		},
+	},
+};
 ```
 
 App.vue 中设置好子应用挂载的节点

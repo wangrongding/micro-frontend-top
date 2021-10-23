@@ -1,11 +1,17 @@
 <template>
     <div id="app">
-        <!-- <router-view /> -->
-        <div class="nav"></div>
-        <div class="side-bar"></div>
-        <div id="#subapp-container">
-            <!-- <router-view /> -->
+        <div id="nav">
+            <router-link to="/">Home</router-link>
+            |
+            <router-link to="/about">About</router-link>
+            |
+            <router-link to="/sub-app-vue">sub-app-vue</router-link>
+            |
+            <router-link to="/sub-app-vue2">sub-app-vue2</router-link>
         </div>
+        <router-view v-show="$route.name" />
+        <div id="subapp-container" v-show="!$route.name"></div>
+        <!-- <div id="subapp-container"></div> -->
     </div>
 </template>
 
