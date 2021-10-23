@@ -7,7 +7,8 @@
 		"ins": "node ./script/install.js",
 		"serve": "npm-run-all --parallel serve:*",
 		"serve:main": "cd main && yarn serve",
-		"serve:fp": "cd packages/frontend-park && yarn serve"
+		"serve:vue": "cd packages/sub-app-vue && yarn serve",
+		"serve:vue2": "cd packages/sub-app-vue2 && yarn serve"
 	},
 	"license": "MIT",
 	"devDependencies": {

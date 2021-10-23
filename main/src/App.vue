@@ -5,9 +5,9 @@
             |
             <router-link to="/about">About</router-link>
             |
-            <router-link to="/sub-app-vue">sub-app-vue</router-link>
+            <router-link to="/sub-app-vue">微应用1 sub-app-vue</router-link>
             |
-            <router-link to="/sub-app-vue2">sub-app-vue2</router-link>
+            <router-link to="/sub-app-vue2">微应用2 sub-app-vue2</router-link>
         </div>
         <router-view v-show="$route.name" />
         <div id="subapp-container" v-show="!$route.name"></div>
