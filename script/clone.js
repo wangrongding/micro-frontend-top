@@ -3,27 +3,9 @@ const util = require("util");
 const downloadGitRepo = util.promisify(download);
 //loading
 const loading = require("loading-cli");
+const appList = require("./appList");
 
 //==============================================================
-
-let repos = [
-	{
-		repoUrl: "direct:https://gitee.com/wangrongding/test22222#master",
-		repoName: "test22222",
-	},
-	{
-		repoUrl: "direct:https://gitee.com/wangrongding/test-repo1#master",
-		repoName: "test-repo1",
-	},
-	{
-		repoUrl: "direct:https://gitee.com/wangrongding/jellyfish.git#master",
-		repoName: "jellyfish",
-	},
-	/* {
-		repoUrl: "direct:https://gitee.com/wangrongding/frontend-park.git#main",
-		repoName: "frontend-park",
-	}, */
-];
 
 async function clone(repoUrl, repoName) {
 	const load = loading("请耐心等待,各应用正在clone...").start();
@@ -43,18 +25,6 @@ async function clone(repoUrl, repoName) {
 	);
 }
 
-repos.forEach(async (item) => {
+appList.forEach(async (item) => {
 	await clone(item.repoUrl, "../packages/" + item.repoName);
 });
-//====================================================================
-// downloadGitRepo(item.repoUrl, "../packages/" + item.repoName);
-
-//====================================================================
-/* download(
-	"direct:https://gitee.com/wangrongding/test22222#master",
-	"../packages/test1",
-	{ clone: true },
-	(err) => {
-		console.log(err ? "Error!clone出错,请重新尝试!" + err : "Success~");
-	}
-); */

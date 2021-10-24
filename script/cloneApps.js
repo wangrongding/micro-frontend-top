@@ -1,17 +1,13 @@
 const gitClone = require("git-clone/promise");
 const loading = require("loading-cli");
 const appList = require("./appList");
-/* 
-    repoUrl:git仓库地址
-    targetPath:下载的目标目录
-    cloneOptions:git clone的可选参数
-                git:git二进制路径；默认：（git预计在你的$PATH）
-                shallow: when true，克隆深度为 1
-                checkout: 克隆后要检出的修订版/分支/标签
-                args: 要传递给的额外参数数组 git clone
-    eg: clone(repo, targetPath, [options]
-*/
 
+/**
+* @Description clone远程仓库
+* @Param {ObjectType} repoUrl : git仓库地址
+* @Param {ObjectType} targetPath : 下载的目标目录
+* @Param {ObjectType} cloneOptions : git clone的可选参数[{git:git二进制路径；默认：（git预计在你的$PATH）,shallow: when true，克隆深度为 1,checkout: 克隆后要检出的修订版/分支/标签,args: 要传递给的额外参数数组 git clone}]
+*/
 async function clone(repoUrl, targetPath, cloneOptions = { shallow: 1 }) {
 	if (!(repoUrl && targetPath)) {
 		console.log("repoUrl,targetPath为必传项!");
