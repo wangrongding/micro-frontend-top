@@ -8,6 +8,10 @@
             <router-link to="/sub-app-vue">微应用1 sub-app-vue</router-link>
             |
             <router-link to="/sub-app-vue2">微应用2 sub-app-vue2</router-link>
+            |
+            <router-link to="/frontend-park">微应用3 frontend-park</router-link>
+            |
+            <router-link to="/frontend-park/pixel-image/index">微应用3 子页面</router-link>
         </div>
         <router-view v-show="$route.name" />
         <div id="subapp-container" v-show="!$route.name"></div>
