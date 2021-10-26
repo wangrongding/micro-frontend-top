@@ -6,15 +6,15 @@ export const subApps = [
      * activeRule: 微应用触发的路由规则 - 触发路由规则后将加载该微应用
      */
     {
-        name: "sub-app-vue",
-        entry: "//localhost:9427",
+        name: "mipac-test",
+        entry: "//localhost:9550",
         container: "#subapp-container",
-        activeRule: "/sub-app-vue",
+        activeRule: "/mipac-test",
         props: {
-            routerBase: "/sub-app-vue",
+            routerBase: "/mipac-test",
         },
     },
-    {
+    /*  {
         name: "sub-app-vue2",
         entry: "//localhost:9428",
         container: "#subapp-container",
@@ -31,5 +31,5 @@ export const subApps = [
         props: {
             routerBase: "/frontend-park",
         },
-    },
+    }, */
 ];

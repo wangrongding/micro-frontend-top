@@ -71,15 +71,17 @@ async function clone(repoUrl, targetPath, cloneOptions = { shallow: 1 }) {
 
 通过`npm-run-all`来实现
 
-### 改造开始!
+<!-- ### 改造开始! -->
 
-#### 改造子应用
+### 改造子应用
 
 子应用不需要额外安装任何其他依赖即可接入 qiankun 主应用。
 
-**主要需要做如下配置(这里以 vue 应用为例):**
+**\*\*\*** **主要需要做如下配置(这里以 vue 应用为例):** 👈
 
 -   在 子应用的 src 目录新增 public-path.js 文件
+
+通过`__webpack_public_path__`设置 webpack publicPath，防止资源加载出错
 
 ```javascript
 if (window.__POWERED_BY_QIANKUN__) {
@@ -87,7 +89,89 @@ if (window.__POWERED_BY_QIANKUN__) {
 }
 ```
 
--   导出相应的生命周期钩子
+-   修改子应用中的 router 文件
+
+将 src 下的 router/index.js 中的蓝色区域注释调,直接通过 `export default` 导出定义的路由数组
+
+<img src="https://gitee.com/wangrongding/image-house/raw/master/images/202110261647660.png"/>
+-   在子应用 src 下的 main.js 中
+
+引入上面新增的`public-path.js`,然后新建一个`render`函数,并创建 VueRouter,然后挂载到应用上。
+导出 bootstrap、mount、unmount 三个生命周期钩子，以供主应用在适当的时机调用。
+
+完整代码如下:
+
+```javascript
+import Vue from "vue";
+import App from "./App.vue";
+import store from "./store";
+
+Vue.config.productionTip = false;
+
+//-------------------------挂载应用------------------------------
+import "./public-path";
+import routes from "./router";
+import VueRouter from "vue-router";
+let Router = null;
+let instance = null;
+
+function render(props = {}) {
+	const { container, routerBase } = props;
+	//在 render 中创建 VueRouter，可以保证在卸载微应用时，移除 location 事件监听，防止事件污染
+	Router = new VueRouter({
+		base: window.__POWERED_BY_QIANKUN__ ? routerBase : "/",
+		mode: "history",
+		routes: routes,
+	});
+	// 挂载应用
+	instance = new Vue({
+		router: Router,
+		store,
+		render: (h) => h(App),
+	}).$mount(container ? container.querySelector("#app") : "#app"); //为了避免根 id #app 与其他的 DOM 冲突，需要限制查找范围
+}
+
+//---------------------------独立运行时-------------------------
+//
+if (!window.__POWERED_BY_QIANKUN__) {
+	render();
+}
+
+//------------------------导出相应的生命周期钩子------------------
+/**
+ * bootstrap 只会在微应用初始化的时候调用一次，下次微应用重新进入时会直接调用 mount 钩子，不会再重复触发 bootstrap。
+ * 通常我们可以在这里做一些全局变量的初始化，比如不会在 unmount 阶段被销毁的应用级别的缓存等。
+ */
+export async function bootstrap() {
+	console.log("react app bootstraped");
+}
+
+/**
+ * 应用每次进入都会调用 mount 方法，通常我们在这里触发应用的渲染方法
+ */
+export async function mount(props) {
+	console.log("VueMicroApp mount", props);
+	render(props);
+}
+
+/**
+ * 应用每次 切出/卸载 会调用的方法，通常在这里我们会卸载微应用的应用实例
+ */
+export async function unmount(props) {
+	console.log("VueMicroApp unmount");
+	instance.$destroy();
+	instance.$el.innerHTML = "";
+	instance = null;
+	Router = null;
+}
+
+/**
+ * 可选生命周期钩子，仅使用 loadMicroApp 方式加载微应用时生效
+ */
+export async function update(props) {
+	console.log("update props", props);
+}
+```
 
 -   子应用的`vue.config.js`中必须添加如下配置
 
@@ -95,16 +179,16 @@ if (window.__POWERED_BY_QIANKUN__) {
 const appName = require("./package.json").name;
 module.exports = {
 	devServer: {
-		port: 9427,
 		headers: {
 			"Access-Control-Allow-Origin": "*", // 主应用获取子应用时跨域响应头
 		},
 	},
 	configureWebpack: {
+		//为了让主应用能正确识别微应用暴露出来的一些信息，微应用的打包工具需要增加如下配置
 		output: {
-			library: `${appName}-[name]`,
+			library: `${appName}-[name]`, // 微应用的包名，必须与主应用中注册的微应用名称一样!
 			libraryTarget: "umd", // 把微应用打包成 umd 库格式
-			jsonpFunction: `webpackJsonp_${appName}`,
+			jsonpFunction: `webpackJsonp_${appName}`, //按需加载
 		},
 	},
 };
@@ -115,10 +199,17 @@ App.vue 中设置好子应用挂载的节点
 ```html
 <template>
 	<div id="app">
-		<!-- <router-view /> -->
-		<div class="nav"></div>
-		<div class="side-bar"></div>
-		<div id="#subapp-container"></div>
+		<div id="nav">
+			<router-link to="/">Home</router-link>
+			|
+			<router-link to="/about">About</router-link>
+			|
+			<router-link to="/sub-app-vue">微应用1 sub-app-vue</router-link>
+			|
+			<router-link to="/mipac-test">测试题</router-link>
+		</div>
+		<router-view v-show="$route.name" />
+		<div id="subapp-container" v-show="!$route.name"></div>
 	</div>
 </template>
 ```
