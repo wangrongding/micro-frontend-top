@@ -4,18 +4,6 @@
 	installMethod:项目依赖安装方式[yarn,npm,cnpm,pnpm...]
 */
 const appList = [
-	/* {
-		repoUrl: "https://gitee.com/wangrongding/jellyfish.git",
-		repoName: "jellyfish",
-		installMethod: "yarn",
-		serveMethod: "serve",
-	}, */
-	{
-		repoUrl: "https://gitee.com/wangrongding/frontend-park.git",
-		repoName: "frontend-park",
-		installMethod: "yarn",
-		serveMethod: "serve",
-	},
 	{
 		repoUrl: "https://gitee.com/wangrongding/sub-app-vue.git",
 		repoName: "sub-app-vue",
