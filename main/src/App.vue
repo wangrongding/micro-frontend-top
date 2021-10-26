@@ -15,7 +15,6 @@
         </div>
         <router-view v-show="$route.name" />
         <div id="subapp-container" v-show="!$route.name"></div>
-        <!-- <div id="subapp-container"></div> -->
     </div>
 </template>
 
