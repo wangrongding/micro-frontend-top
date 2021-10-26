@@ -173,6 +173,8 @@ export async function update(props) {
 }
 ```
 
+qiankun 是基于 single-spa 实现的，所以你可以在[Registered application lifecycle](https://single-spa.js.org/docs/building-applications/#registered-application-lifecycle)找到更多关于微应用生命周期相关的文档说明。
+
 -   子应用的`vue.config.js`中必须添加如下配置
 
 ```js
@@ -194,31 +196,11 @@ module.exports = {
 };
 ```
 
-App.vue 中设置好子应用挂载的节点
+### 基座应用需要做的事
 
-```html
-<template>
-	<div id="app">
-		<div id="nav">
-			<router-link to="/">Home</router-link>
-			|
-			<router-link to="/about">About</router-link>
-			|
-			<router-link to="/sub-app-vue">微应用1 sub-app-vue</router-link>
-			|
-			<router-link to="/mipac-test">测试题</router-link>
-		</div>
-		<router-view v-show="$route.name" />
-		<div id="subapp-container" v-show="!$route.name"></div>
-	</div>
-</template>
-```
+-   在基座应用中安装 qiankun,`yarn add qiankun`/`xxx install qiankun`
 
-在基座应用中安装 qiankun
-
-`yarn add qiankun`
-
-新建一个 subApp.js 的文件,用于存放子应用的配置
+-   在基座应用的 src 中新建一个 subApp.js 的文件,用于存放子应用的配置
 
 具体如下
 
@@ -246,11 +228,30 @@ const subApps = [
 export default subApps;
 ```
 
+在 基座应用的 App.vue 中设置好子应用挂载的节点
+
+```html
+<div id="app">
+	<div id="nav">
+		<router-link to="/">Home</router-link>
+		|
+		<router-link to="/about">About</router-link>
+		|
+		<router-link to="/sub-app-vue">微应用1</router-link>
+		|
+		<router-link to="/sub-app-vue2">微应用2</router-link>
+	</div>
+	<router-view v-show="$route.name" />
+	<div id="subapp-container" v-show="!$route.name"></div>
+</div>
+```
+
 在基座应用 main.js 中配置如下
 
 ```js
 import { registerMicroApps, start } from "qiankun";
 import subApps from "./subApp";
+//注册子应用
 registerMicroApps(subApps, {
 	beforeLoad: (app) => {
 		console.log("beforeLoad", app.name);
@@ -273,8 +274,6 @@ registerMicroApps(subApps, {
 });
 start();
 ```
-
-### 注册子应用
 
 ## 开袋即食(食用说明)
 
