@@ -9,21 +9,21 @@ const appList = [
 		repoUrl:
 			"git@codeup.aliyun.com:606d41ff7470561e6a716285/uicode/youth-assessment/youth-assessment-intervention.git",
 		repoName: "intervention",
-		installMethod: "npm",
+		installMethod: "cnpm",
 		serveMethod: "serve",
 	},
 	{
 		repoUrl:
 			"git@codeup.aliyun.com:606d41ff7470561e6a716285/uicode/youth-assessment/youth-assessment-mipac-admin.git",
 		repoName: "mipac-admin",
-		installMethod: "npm",
+		installMethod: "cnpm",
 		serveMethod: "serve",
 	},
 	{
 		repoUrl:
 			"git@codeup.aliyun.com:606d41ff7470561e6a716285/uicode/youth-assessment/youth-assessment-mipac-test.git",
 		repoName: "mipac-test",
-		installMethod: "npm",
+		installMethod: "cnpm",
 		serveMethod: "serve",
 	},
 ];

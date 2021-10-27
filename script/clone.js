@@ -16,7 +16,6 @@ async function clone(repoUrl, targetPath, cloneOptions = { shallow: 1 }) {
 	const load = loading("请耐心等待,各应用正在clone...").start();
 	await gitClone(repoUrl, targetPath, cloneOptions)
 		.then(() => {
-			// console.clear();
 			console.log(`成功! clone ${targetPath}完成~ ✔💚`);
 		})
 		.catch((err) => {
