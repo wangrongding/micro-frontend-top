@@ -1,18 +1,26 @@
 /* eslint-disable */
-import { registerMicroApps, start, setDefaultMountApp, addGlobalUncaughtErrorHandler, loadMicroApp, prefetchApps } from "qiankun";
-import { subApps } from "./subApps"
+import {
+    registerMicroApps,
+    start,
+    setDefaultMountApp,
+    addGlobalUncaughtErrorHandler,
+    loadMicroApp,
+    prefetchApps,
+} from "qiankun";
+import { subApps } from "./subApps";
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 Vue.config.productionTip = false;
+import "@/assets/index.scss";
 
 console.log("=================================", subApps);
 new Vue({
     router,
     store,
-    render: h => h(App),
-}).$mount('#app');
+    render: (h) => h(App),
+}).$mount("#app");
 
 //注册子应用
 registerMicroApps(subApps, {
@@ -36,10 +44,8 @@ registerMicroApps(subApps, {
     ],
 });
 
-
 // 启动 qiankun
 // start();
-
 
 // setDefaultMountApp('/sub-app-vue')
 // start({ prefetch: "all" });

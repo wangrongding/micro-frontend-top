@@ -27,4 +27,7 @@
     text-align: center;
     color: #2c3e50;
 }
+#subapp-container {
+    height: 100vh;
+}
 </style>
