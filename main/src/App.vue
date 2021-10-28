@@ -8,8 +8,6 @@
             <router-link to="/mipac-test/home">测试题</router-link>
             |
             <router-link to="/mipac-admin">管理</router-link>
-            |
-            <router-link to="/sub-app-vue">微应用1</router-link>
         </div>
         <router-view v-show="$route.name" />
         <div id="subapp-container" v-show="!$route.name"></div>
@@ -25,6 +23,12 @@
     color: #2c3e50;
     margin: 0;
     padding: 0;
+}
+#nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999999;
 }
 #subapp-container {
     height: 100vh;
