@@ -6,8 +6,6 @@ import router from "./router";
 import store from "./store";
 Vue.config.productionTip = false;
 
-console.log("=================================", subApps);
-
 new Vue({
     router,
     store,

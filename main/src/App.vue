@@ -7,7 +7,6 @@
             |
             <router-link to="/mipac-test/home">测试题</router-link>
             |
-            <router-link to="/mipac-admin/data-panel">管理后台</router-link>
             <router-link to="/mipac-admin">管理</router-link>
             |
             <router-link to="/sub-app-vue">微应用1</router-link>
@@ -24,5 +23,10 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    margin: 0;
+    padding: 0;
+}
+#subapp-container {
+    height: 100vh;
 }
 </style>
