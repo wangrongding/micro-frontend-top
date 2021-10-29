@@ -33,4 +33,7 @@
 #subapp-container {
     height: 100vh;
 }
+#subapp-container {
+    height: 100vh;
+}
 </style>
