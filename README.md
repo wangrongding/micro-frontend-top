@@ -10,10 +10,9 @@
 
 ### 启动步骤
 
-1.  下载该项目第一件事,使用`yarn`命令，先安装根目录的依赖
-2.  使用`yarn clone`命令，Clone Script 文件夹中 appList 中配置的所有的子应用到 packages 目录中
-3.  使用`yarn ins`命令，安装所有项目的依赖
-4.  使用`yarn serve`命令，启动所有服务
+1.  `yarn clone`clone 所有的子应用到 packages 目录中
+2.  `yarn ins`安装所有项目的依赖
+3.  `yarn start`启动所有服务
 
 ## 实现方法记录
 

@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"clone": "node ./script/clone.js",
+		"clone": "node ./script/cloneApps.js",
 		"ins": "node ./script/install.js",
 		"serve": "node ./script/serve.js",
 		"serve:main": "cd main && npm run serve",
