@@ -6,30 +6,30 @@ export const subApps = [
      * activeRule: 微应用触发的路由规则 - 触发路由规则后将加载该微应用
      */
     {
-        name: "sub-app-vue",
-        entry: "//localhost:9427",
+        name: "mipac-test",
+        entry: "//localhost:9550",
         container: "#subapp-container",
-        activeRule: "/sub-app-vue",
+        activeRule: "/mipac-test",
         props: {
-            routerBase: "/sub-app-vue",
+            routerBase: "/mipac-test",
         },
     },
     {
-        name: "sub-app-vue2",
-        entry: "//localhost:9428",
+        name: "mipac-admin",
+        entry: "//localhost:9552",
         container: "#subapp-container",
-        activeRule: "/sub-app-vue2",
+        activeRule: "/mipac-admin",
         props: {
-            routerBase: "/sub-app-vue2",
+            routerBase: "/mipac-admin",
         },
     },
     {
-        name: "frontend-park",
-        entry: "//localhost:9425",
+        name: "intervention",
+        entry: "//localhost:9554",
         container: "#subapp-container",
-        activeRule: "/frontend-park",
+        activeRule: "/intervention",
         props: {
-            routerBase: "/frontend-park",
+            routerBase: "/intervention",
         },
     },
 ];
