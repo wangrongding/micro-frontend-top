@@ -55,7 +55,8 @@ registerMicroApps(subApps, {
 start({
     prefetch: "all", // 开启预加载
     sandbox: {
-        experimentalStyleIsolation: true, //   开启沙箱模式,实验性方案
+        // strictStyleIsolation: true,
+        // experimentalStyleIsolation: true, //   开启沙箱模式,实验性方案
     },
 });
 
