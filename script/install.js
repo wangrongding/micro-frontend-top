@@ -5,6 +5,7 @@ const appList = require("./appList").concat([
 	{ repoName: "", installMethod: "yarn" },
 ]);
 // const exec = util.promisify(require("child_process").exec);
+// const spawn = util.promisify(require("child_process").spawn);
 const spawn = require("child_process").spawnSync;
 
 /**
@@ -33,6 +34,7 @@ async function install(targetPath, installMethod) {
 			break;
 	}
 	console.log(targetPath, command);
+	// const load = loading(`请耐心等待,正在安装依赖...`).start();
 	const { stdout, stderr } = await spawn(command, {
 		shell: true,
 		cwd: path.resolve(
@@ -40,6 +42,7 @@ async function install(targetPath, installMethod) {
 			targetPath ? "packages/" + targetPath : "main"
 		),
 	});
+	// load.stop();
 	console.log(stderr.toString());
 	console.log(stdout.toString(), "✅");
 	/* const { stdout, stderr } = await exec(command, {
@@ -68,7 +71,6 @@ Promise.all(
 	})
 	.finally();
 
-// application specific logging, throwing an error, or other logic here
 process.on("unhandledRejection", (reason, p) => {
 	console.log("Unhandled Rejection at: Promise", p, "reason:", reason);
 });
