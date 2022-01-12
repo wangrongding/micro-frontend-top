@@ -1,4 +1,9 @@
-import { registerMicroApps, start, addGlobalUncaughtErrorHandler } from "qiankun";
+import {
+    registerMicroApps,
+    start,
+    addGlobalUncaughtErrorHandler,
+    setDefaultMountApp,
+} from "qiankun";
 import { subApps } from "./subApps";
 import Vue from "vue";
 import App from "./App.vue";
@@ -16,26 +21,30 @@ new Vue({
 
 //注册子应用
 registerMicroApps(subApps, {
-    beforeLoad: (app) => {
-        console.log("beforeLoad", app.name);
-    },
+    beforeLoad: [
+        (app) => {
+            console.log("1.beforeLoad", app.name);
+        },
+    ],
     beforeMount: [
         (app) => {
-            console.log("beforeMount", app.name);
+            console.log("2.beforeMount", app.name);
         },
     ],
     afterMount: [
         (app) => {
-            console.log("afterMount", app.name);
+            console.log("3.afterMount", app.name);
         },
     ],
     afterUnmount: [
         (app) => {
-            console.log("afterUnmount", app.name);
+            console.log("4.afterUnmount", app.name);
         },
     ],
 });
-
+//设置默认进入的子应用
+setDefaultMountApp("/student");
+//启动应用
 start({
     prefetch: "all", // 开启预加载
     sandbox: {

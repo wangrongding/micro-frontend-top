@@ -1,13 +1,9 @@
 <template>
     <div id="app">
         <div id="nav">
-            <router-link to="/">Home</router-link>
+            <router-link to="/admin">管理</router-link>
             |
-            <router-link to="/mipac-test/home">测试题</router-link>
-            |
-            <router-link to="/mipac-admin">管理</router-link>
-            |
-            <router-link to="/intervention">自主干预</router-link>
+            <router-link to="/student">自主干预</router-link>
         </div>
         <router-view v-show="$route.name" />
         <div id="subapp-container" v-show="!$route.name"></div>
