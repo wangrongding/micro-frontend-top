@@ -7,7 +7,7 @@ export const subApps = [
      */
     {
         name: "admin",
-        entry: "http://localhost:9421",
+        entry: "http://192.168.1.126:9421",
         container: "#subapp-container",
         activeRule: "/admin",
         props: {
@@ -16,7 +16,7 @@ export const subApps = [
     },
     {
         name: "student",
-        entry: "//localhost:9554",
+        entry: "http://192.168.1.126:9554",
         container: "#subapp-container",
         activeRule: "/student",
         props: {
