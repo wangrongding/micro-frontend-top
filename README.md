@@ -342,3 +342,8 @@ app 实例的操作必须写在 `render` 函数里面，要不然切换子应用
 ## 开袋即食(食用说明)
 
 下载本项目后,首先配置好自己的子应用 git remote 仓库地址
+
+## 子应用之间的跳转
+
+通过：  
+window.history.pushState(state, title[, url])
