@@ -7,7 +7,8 @@ export const subApps = [
      */
     {
         name: "admin",
-        entry: "http://192.168.1.126:9421",
+        // entry: "http://192.168.1.126:9421",
+        entry: "http://192.168.1.126:33112",
         container: "#subapp-container",
         activeRule: "/admin",
         props: {
@@ -16,7 +17,8 @@ export const subApps = [
     },
     {
         name: "student",
-        entry: "http://192.168.1.126:9554",
+        // entry: "http://192.168.1.126:9554",
+        entry: "http://192.168.1.126:33111",
         container: "#subapp-container",
         activeRule: "/student",
         props: {
