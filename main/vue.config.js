@@ -14,7 +14,7 @@ module.exports = {
         config.resolve.alias.set("@", resolve("src"));
         // 配置网页title;
         config.plugin("html").tap((args) => {
-            args[0].title = "主应用";
+            args[0].title = "心积木成长学校";
             return args;
         });
     },
